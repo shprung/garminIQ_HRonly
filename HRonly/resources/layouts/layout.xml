@@ -1,0 +1,6 @@
+<layout id="MainLayout">
+    <label id="tmHM" x="115" y="1"   font="Gfx.FONT_NUMBER_HOT" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_RIGHT" />
+    <label id="tmS"  x="120" y="22"  font="Gfx.FONT_NUMBER_MILD" color="Gfx.COLOR_WHITE" />
+    <label id="HR"   x="142" y="50"  font="@Fonts.myHRfont" color="0x00FFFF" justification="Gfx.TEXT_JUSTIFY_RIGHT" />
+    <label id="bat"  x="2"   y="163" font="Gfx.FONT_TINY" color="0x999999" />
+</layout>

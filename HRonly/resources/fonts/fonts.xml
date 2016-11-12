@@ -1,0 +1,3 @@
+<fonts> 
+	<font id="myHRfont" filename="digits.fnt" filter="0123456789"/>
+</fonts>
