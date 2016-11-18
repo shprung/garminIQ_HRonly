@@ -10,7 +10,6 @@ class HRonlyView extends Ui.View {
     
     function initialize() { 
     	View.initialize();
-    	HR.setEnabledSensors( [HR.SENSOR_HEARTRATE] );
     	timer.start(new Toybox.Lang.Method(Ui, :requestUpdate), 500, true);
     }
     
@@ -25,17 +24,21 @@ class HRonlyView extends Ui.View {
         var tm = Sys.getClockTime();
         var h  = (devSet.is24Hour?tm.hour:tm.hour%12==0?12:tm.hour%12);
         var b  = Sys.getSystemStats().battery.format("%d");
+        var t1 = Math.floor((Sys.getTimer()-t0)/1000);
         var bpm= HR.getInfo().heartRate;
-        if (bpm==null) { bpm=Math.rand()%10+250; } 
+        if (bpm==null) { 
+        	bpm=tm.sec%2==1?"A ":"B "; // using font as graphics for 2 frame animation
+        	if(t1%5==0 && t1<11) { HR.setEnabledSensors( [HR.SENSOR_HEARTRATE] ); }  // try to kick start the sensor
+        } 
+        else { bpm=bpm.format("%d"); }
 		lbl["tmHM"].setText(h.format("%d")+':'+tm.min.format("%02d"));
         lbl["tmS"].setText(tm.sec.format("%02d"));
-        var t1=Math.floor((Sys.getTimer()-t0)/1000);
         h=Math.floor(t1/3600);
         t1-=h*3600;
         var m=Math.floor(t1/60);
         t1-=m*60;
         lbl["bat"].setText("Battery "+b+"%\nApp time "+h+":"+m.format("%02d")+":"+t1.format("%02d"));
-        lbl["HR"].setText(bpm.format("%d"));
+        lbl["HR"].setText(bpm);
         View.onUpdate(dc);
     }
 }
